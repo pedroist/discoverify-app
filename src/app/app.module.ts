@@ -13,6 +13,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
+import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,10 @@ import { AppRoutingModule } from './/app-routing.module';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
