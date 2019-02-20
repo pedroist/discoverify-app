@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { SpotifyService } from '../../services/spotify.service';
-import { Artist } from '../../models/Artist';
+import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-home',
@@ -9,36 +9,25 @@ import { Artist } from '../../models/Artist';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  artists: Artist[];
 
   constructor(
     private authService: AuthService,
-    private spotifyService: SpotifyService
+    private router: Router
   ) { }
 
   ngOnInit() {
     const token = this.authService.extractToken();
 
-    if (!this.authService.isLoggedIn()) {
-      //TODO: Redirect to login page;
-      console.log("Not logged in")
-    } else {
-      console.log("Logged in")
-      //TODO: Redirect to Home page (without the access_token on URL);
-    }
-  }
+    this.authService.setIsLoggedInReference(this.authService.isLoggedIn());
 
-  onLogin() {
-    this.authService.login();
-  }
-
-  onLogout() {
-    this.authService.logout();
-  }
-
-  onSearch() {
-    this.spotifyService.searchArtists().subscribe(artists => {
-      this.artists = artists;
+    this.authService.isLoggedInReference.subscribe(isLoggedIn => {
+      if (!isLoggedIn) {
+        console.log("Not logged in")
+      } else {
+        console.log("Logged in")
+        //TODO: Redirect to Home page (without the access_token on URL);
+        this.router.navigate(['/']);
+      }
     });
   }
 }

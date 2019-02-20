@@ -1,15 +1,38 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
     <a routerLink="/" class="navbar-brand">Discoverify</a>
-    <div class="collapse navbar-collapse">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a routerLink="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link">Login</a>
+          <a *ngIf="!isLoggedIn" (click)="openModal(content)" class="nav-link">Login</a>
+          <a *ngIf="isLoggedIn" (click)="onLogout()" class="nav-link">Logout</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!--Login Modal-->
+<ng-template #content>
+  <app-login></app-login>
+  <!--
+    <div class="modal-header">
+        <div class="col-md-12 text-center">
+          <h2>Login with Spotify</h2>
+        </div>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button (click)="onLogin()" class="btn btn-info col-5 login-btn">Login</button>
+        </div>
+      </div>
+    </div>
+    -->
+  </ng-template>

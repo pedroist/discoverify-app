@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private isLoggedInSource = new BehaviorSubject<boolean>(false);
+  isLoggedInReference = this.isLoggedInSource.asObservable();
 
   constructor() { }
 
@@ -14,6 +18,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     console.log("Logged out");
+
+    //notify other components subscribed to isLoggedInReference that is now logged out
+    this.isLoggedInSource.next(false);
   }
 
   extractToken() {
@@ -32,15 +39,11 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  isLoggedIn() {
-    if (!localStorage.getItem('token')) {
-      //TODO: verificar data validade
-      console.log("Doing the loggin")
-      return this.extractToken() != "" ? true : false;
-    } else {
-      //TODO: verificar data validade
-      console.log("Already Logged in");
-      return true;
-    }
+  isLoggedIn(): boolean {
+    return localStorage.getItem('token') ? true : false;
+  }
+
+  setIsLoggedInReference(isLoggedIn: boolean) {
+    this.isLoggedInSource.next(isLoggedIn);
   }
 }

@@ -17,6 +17,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
 import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { ErrorInterceptorService } from './interceptors/error-interceptor.servic
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
