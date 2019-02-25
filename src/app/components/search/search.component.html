@@ -1,0 +1,37 @@
+<!--<img src="../../../assets/img/search-cover.PNG" alt="search-cover-img">-->
+<div class="cover-component">
+    <h1>Choose your favorite artists...</h1>
+</div>
+<div class="container mt-3 pt-3">
+  <form #searchForm (ngSubmit)="onSearch()" class="form-inline form-container">
+    <div class="row">
+      <div class="col-12">
+        <input type="text"
+          class="form-control"
+          name="searchTerm"
+          id="searchInput"
+          [(ngModel)]= "searchTerm"
+          (keyup)="onInputChange()"
+          placeholder="Search for an artist..."
+          required
+          autocomplete="off">
+        <ul class="list-group" id="artistsList" (focusout)="onFocusOut()">
+          <li *ngFor="let result of searchResults" (click)="onSelect(result)" class="list-group-item">
+            <div class="row">
+              <img src={{result.image_url}} alt={{result.name}}>
+              <div class="ml-2">{{result.name}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+
+  <div class="container mt-3 pt-3 grid-container">
+    <app-artist-card *ngFor="let artist of artistsList" [cardArtist]="artist"></app-artist-card>
+  </div>
+
+  <div *ngIf="artistsList.length > 0" class="create-playlist">
+    <button (click)="createPlaylist()" class="btn btn-dark-blue col-3 ">Create Playlist</button>
+  </div>
+</div>

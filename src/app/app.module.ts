@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { ArtistCardComponent } from './components/artist-card/artist-card.component';
 import { ArtistsComponent } from './components/artists/artists.component';
 import { CreatePlaylistModalComponent } from './components/create-playlist-modal/create-playlist-modal.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
@@ -18,6 +19,7 @@ import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
 import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +28,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ArtistsComponent,
     CreatePlaylistModalComponent,
     HomeComponent,
-    LoginComponent,
+    LoginModalComponent,
     NavbarComponent,
     NotFoundComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     NgbModule
   ],
   providers: [

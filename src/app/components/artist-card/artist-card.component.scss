@@ -1,0 +1,23 @@
+.card-artist {
+    .card-img {
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
+    }
+
+    .card-info {
+        margin-top: 5px;
+        text-align: center;
+        h5 {
+            margin-bottom: 2px;
+        }
+        .card-info-body {
+            h6 {
+                margin-top: 3px;
+                margin-bottom: 1px;
+                font-weight: 500;
+                font-size: 1rem;
+            }
+        }
+    }
+}

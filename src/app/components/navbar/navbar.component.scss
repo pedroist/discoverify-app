@@ -1,0 +1,22 @@
+.title{
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffffcf;
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .avatar {
+        vertical-align: bottom;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    }
+}

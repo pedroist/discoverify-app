@@ -1,0 +1,40 @@
+.cover-component {
+    background-image: url(../../../assets/img/search-cover.PNG);
+}
+
+.container {
+    .form-inline {
+        display: flex;
+        justify-content: center;
+    }
+    input {
+        width: 100%;
+    }
+    .list-group{
+        position: absolute;
+        width: 87%;
+
+        li {
+            background-color: #ffffffed;
+        }
+        li:hover{
+            background-color: #1d9cb0ed;
+        }
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+.grid-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.create-playlist {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
