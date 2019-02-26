@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { Artist } from 'src/app/models/Artist';
+import { Track } from '../../models/Track';
+import { ModalService } from '../../services/modal.service';
+import { MapperService } from '../../services/mapper';
 
 declare var $: any;
 
@@ -11,17 +14,18 @@ declare var $: any;
 })
 export class SearchComponent implements OnInit {
   searchTerm: string;
-  searchResults: Artist[];
-  artistsList: Artist[];
+  searchResults: Artist[] = [];
+  artistsList: Artist[] = [];
+  relatedArtists: Artist[] = [];
+  topTracks: Track[] = [];
 
   constructor(
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private modalService: ModalService,
+    private mapper: MapperService
   ) { }
 
   ngOnInit() {
-    this.searchResults = [];
-    this.artistsList = [];
-
     //Hide/show suggestions when clicked outside or inside searchbar
     $(document).mouseup(function (e) {
       var container = $("#artistsList");
@@ -43,21 +47,9 @@ export class SearchComponent implements OnInit {
       this.spotifyService.searchArtists(this.searchTerm).subscribe(result => {
         this.searchResults = [];
         result.artists.items.forEach(artist => {
-          /*Transform genres array into string*/
-          var genresAsString = "";
-          for (let genre of artist.genres) {
-            if (genre != "") {
-              genresAsString = genresAsString.length > 0 ? genresAsString.concat(", " + genre) : genresAsString.concat(genre);
-            }
-          }
-          //Add artists to list
-          this.searchResults.push({
-            id: artist.id,
-            name: artist.name.length > 17 ? artist.name.slice(0, 16) + "..." : artist.name,
-            image_url: artist.images[2] ? artist.images[2].url : "assets/icons/151716-musician-human-pictograms/svg/singer-4.svg",
-            genres: genresAsString.length > 25 ? genresAsString.slice(0, 24) + "..." : genresAsString,
-            followers: artist.followers.total
-          } as Artist);
+
+          //Add artists to search results list (results in search bar)
+          this.searchResults.push(this.mapper.jsonToArtist(artist));
         });
       });
     }
@@ -69,4 +61,34 @@ export class SearchComponent implements OnInit {
     this.artistsList.unshift(artist);
   }
 
+  createPlaylist(content) {
+    //search related artists
+    for (let artist of this.artistsList) {
+      if (artist.id != null && typeof artist.id != "undefined") {
+        //Spotify request
+        this.spotifyService.getRelatedArtists(artist.id).subscribe(result => {
+
+          for (let i = 0; i < 3; i++) {
+            //Save related artist
+            this.relatedArtists.push(this.mapper.jsonToArtist(result.artists[i]));
+
+            //get related artist's top 10 songs
+            this.spotifyService.getArtistTop10(result.artists[i].id).subscribe(result => {
+              //save top tracks
+              for (let track of result.tracks) {
+                this.topTracks.push(this.mapper.jsonToTrack(track));
+              }
+            })
+          }
+        });
+      }
+    }
+
+    //open create-playlist-modal and pass the songs
+    this.modalService.openModal(content);
+  }
+
+  getRelated() {
+    console.log(this.topTracks);
+  }
 }

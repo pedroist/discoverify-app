@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth.service';
 import { SpotifyService } from '../../services/spotify.service';
 import { Profile } from '../../models/Profile';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,7 @@ export class NavbarComponent implements OnInit {
   };
 
   constructor(
-    private modalService: NgbModal,
+    private modalService: ModalService,
     private authService: AuthService,
     private spotifyService: SpotifyService
   ) { }
@@ -43,7 +44,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openModal(content) {
-    this.modalService.open(content, { centered: true });
+    this.modalService.openModal(content);
   }
 
   onLogout() {

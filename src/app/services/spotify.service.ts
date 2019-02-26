@@ -16,13 +16,27 @@ export class SpotifyService {
 
   constructor(private http: HttpClient) { }
 
+  //Artists
   searchArtists(searchTerm: string): Observable<any> {
     const url = `${BASE_URL}/search?q=${searchTerm}&type=artist&market=PT&limit=5&offset=0`;
     return this.http.get<Artist[]>(url);
   }
 
+  getRelatedArtists(artistId: string): Observable<any> {
+    const url = `${BASE_URL}/artists/${artistId}/related-artists`;
+    return this.http.get<Artist[]>(url);
+  }
+
+  getArtistTop10(artistId: string): Observable<any> {
+    const url = `${BASE_URL}/artists/${artistId}/top-tracks?country=PT`;
+    return this.http.get<Artist[]>(url);
+  }
+
+  //Profile
   getProfile(): Observable<any> {
     const url = BASE_URL + '/me';
     return this.http.get<Profile>(url);
   }
+
+
 }

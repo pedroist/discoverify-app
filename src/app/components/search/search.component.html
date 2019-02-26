@@ -3,7 +3,7 @@
     <h1>Choose your favorite artists...</h1>
 </div>
 <div class="container mt-3 pt-3">
-  <form #searchForm (ngSubmit)="onSearch()" class="form-inline form-container">
+  <form #searchForm class="form-inline form-container">
     <div class="row">
       <div class="col-12">
         <input type="text"
@@ -32,6 +32,14 @@
   </div>
 
   <div *ngIf="artistsList.length > 0" class="create-playlist">
-    <button (click)="createPlaylist()" class="btn btn-dark-blue col-3 ">Create Playlist</button>
+    <button (click)="createPlaylist(content)" class="btn btn-dark-blue col-3 ">Create Playlist</button>
   </div>
+  <div *ngIf="artistsList.length > 0" class="create-playlist">
+      <button (click)="getRelated()" class="btn btn-dark-blue col-3 "> artists</button>
+    </div>
 </div>
+
+<!--create-playlist-modal-->
+<ng-template #content>
+  <app-create-playlist-modal></app-create-playlist-modal>
+</ng-template>
