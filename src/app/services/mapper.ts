@@ -51,13 +51,13 @@ export class MapperService {
     for (let artist of trackJson.artists) {
       artistsAux.push(this.jsonToArtistShort(artist));
     }
-
     return {
       id: trackJson.id,
       name: trackJson.name,
       duration: trackJson.duration_ms,
       artists: artistsAux,
-      album: this.jsonToAlbum(trackJson.album)
+      album: this.jsonToAlbum(trackJson.album),
+      uri: trackJson.uri
     } as Track;
   }
 }

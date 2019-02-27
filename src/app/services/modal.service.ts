@@ -11,4 +11,8 @@ export class ModalService {
   openModal(content) {
     this.modalService.open(content, { centered: true });
   }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
 }

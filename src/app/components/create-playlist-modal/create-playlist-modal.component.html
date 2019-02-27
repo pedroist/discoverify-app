@@ -22,6 +22,7 @@
       <textarea 
         style="width: 100%"
         name="playlistDescription"
+        [(ngModel)]="playlistDescription"
         cols="37"
         rows="5"
         placeholder="Insert a Description..."
@@ -29,13 +30,13 @@
     </div>
     <div class="col-sm-4 col-4 d-flex flex-column justify-content-end">  
       <div class="form-check ml-4">
-        <input class="form-check-input mr-0" type="radio" name="radioButton" id="privateRadioButton" value="private" checked>
+        <input class="form-check-input mr-0" [(ngModel)]="playlistPrivacy" type="radio" name="radioButton" id="privateRadioButton" value="private" checked>
         <label class="form-check-label pl-1" for="privateRadioButton">
           Private
         </label>
       </div>
       <div class="form-check ml-4">
-        <input class="form-check-input mr-0" type="radio" name="radioButton" id="publicRadioButton" value="public">
+        <input class="form-check-input mr-0" [(ngModel)]="playlistPrivacy" type="radio" name="radioButton" id="publicRadioButton" value="true">
         <label class="form-check-label pl-1" for="publicRadioButton">
           Public
         </label>

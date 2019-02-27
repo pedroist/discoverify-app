@@ -106,19 +106,6 @@ export class SearchComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
-    //open create-playlist-modal and pass the songs
-    // this.topTracksAsObservable.subscribe(
-    //   tracks => { },
-    //   err => console.log(err),
-    //   () => {
-    //     if (this.topTracks.length > 0) {
-    //       debugger;
-    //       this.modalService.openModal(content);
-    //     } else {
-    //       alert("No suggestions were found! " + this.topTracks.length);
-    //     }
-    //   }
-    // );
   }
 
   getRelated() {

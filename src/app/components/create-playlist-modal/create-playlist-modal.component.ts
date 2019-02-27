@@ -1,5 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
+import { Track } from '../../models/Track';
+import { Router } from '@angular/router';
+import { ModalService } from '../../services/modal.service';
+
+const PRIVATE = "private";
+const PUBLIC = "public";
 
 @Component({
   selector: 'app-create-playlist-modal',
@@ -32,18 +38,43 @@ import { SpotifyService } from '../../services/spotify.service';
   `]
 })
 export class CreatePlaylistModalComponent implements OnInit {
+  @Input() tracks: Track[];
+  playlistName: string;
+  playlistDescription: string;
+  playlistPrivacy: string = PRIVATE;
+  playlistId: string;
 
   constructor(
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private router: Router,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
   }
 
   createPlaylist() {
-    this.spotifyService.createPlaylist("teste1", "description 1", false)
+    this.spotifyService.createPlaylist(
+      this.playlistName,
+      this.playlistDescription,
+      this.playlistPrivacy === PRIVATE ? false : true
+    )
       .subscribe(result => {
-        console.log(result);
-      });
+        if (!result.id) {
+          throw "Error creating playlist. No id received";
+        }
+        //addTracks to Playlist:
+        //TODO: dividir em 2 caso sejam mais que 100 musicas
+        this.playlistId = result.id;
+
+        this.spotifyService.addTracksToPlaylist(
+          result.id,
+          this.spotifyService.getTracksUrisList(this.tracks)
+        ).subscribe(result => {
+          console.log("Tracks added to playlist " + this.playlistName + "successfully");
+          this.modalService.closeModal();
+          this.router.navigate([`/playlist/${this.playlistId}`]);
+        })
+      })
   }
 }

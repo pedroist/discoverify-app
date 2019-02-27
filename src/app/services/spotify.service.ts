@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Artist } from '../models/Artist';
 import { Profile } from '../models/Profile';
+import { Track } from '../models/Track';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,7 +39,7 @@ export class SpotifyService {
     return this.http.get<Profile>(url);
   }
   //Playlist
-  createPlaylist(name: string, description: string, isPublic: boolean) {
+  createPlaylist(name: string, description: string, isPublic: boolean): Observable<any> {
     const url = BASE_URL + '/me/playlists';
     let body = {
       name: name,
@@ -49,4 +50,23 @@ export class SpotifyService {
     return this.http.post(url, body, httpOptions);
   }
 
+  addTracksToPlaylist(playlistId: string, uris: string[]) {
+    const url = BASE_URL + `/playlists/${playlistId}/tracks`;
+    let body = {
+      uris: uris
+    };
+
+    return this.http.post(url, body, httpOptions);
+  }
+
+  getTracksUrisList(tracks: Track[]): string[] {
+    let uris: string[] = [];
+    for (let track of tracks) {
+      if (track.uri) {
+        uris.push(track.uri);
+      }
+    }
+    console.log("uris: " + uris);
+    return uris;
+  }
 }
