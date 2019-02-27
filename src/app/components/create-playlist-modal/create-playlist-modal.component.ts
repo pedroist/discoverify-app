@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SpotifyService } from '../../services/spotify.service';
 
 @Component({
   selector: 'app-create-playlist-modal',
@@ -32,9 +33,17 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class CreatePlaylistModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private spotifyService: SpotifyService
+  ) { }
 
   ngOnInit() {
   }
 
+  createPlaylist() {
+    this.spotifyService.createPlaylist("teste1", "description 1", false)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
 }

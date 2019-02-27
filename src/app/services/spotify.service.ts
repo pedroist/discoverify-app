@@ -37,6 +37,16 @@ export class SpotifyService {
     const url = BASE_URL + '/me';
     return this.http.get<Profile>(url);
   }
+  //Playlist
+  createPlaylist(name: string, description: string, isPublic: boolean) {
+    const url = BASE_URL + '/me/playlists';
+    let body = {
+      name: name,
+      description: description,
+      public: isPublic
+    };
 
+    return this.http.post(url, body, httpOptions);
+  }
 
 }

@@ -4,8 +4,11 @@ import { Artist } from 'src/app/models/Artist';
 import { Track } from '../../models/Track';
 import { ModalService } from '../../services/modal.service';
 import { MapperService } from '../../services/mapper';
+//import { BehaviorSubject } from 'rxjs';
 
 declare var $: any;
+
+const RELATED_ARTISTS_NUMBER = 3;
 
 @Component({
   selector: 'app-search',
@@ -18,6 +21,9 @@ export class SearchComponent implements OnInit {
   artistsList: Artist[] = [];
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
+
+  // topTracksSource = new BehaviorSubject<Track[]>([]);
+  // topTracksAsObservable = this.topTracksSource.asObservable();
 
   constructor(
     private spotifyService: SpotifyService,
@@ -63,32 +69,59 @@ export class SearchComponent implements OnInit {
 
   createPlaylist(content) {
     //search related artists
-    for (let artist of this.artistsList) {
-      if (artist.id != null && typeof artist.id != "undefined") {
-        //Spotify request
-        this.spotifyService.getRelatedArtists(artist.id).subscribe(result => {
+    new Promise((resolve, reject) => {
+      for (let artist of this.artistsList) {
+        if (artist.id != null && typeof artist.id != "undefined") {
+          //Spotify request
+          this.spotifyService.getRelatedArtists(artist.id).subscribe(result => {
+            if (result.artists.length > 0) {
 
-          for (let i = 0; i < 3; i++) {
-            //Save related artist
-            this.relatedArtists.push(this.mapper.jsonToArtist(result.artists[i]));
+              for (let i = 0; i < RELATED_ARTISTS_NUMBER; i++) {
+                //Save related artist
+                this.relatedArtists.push(this.mapper.jsonToArtist(result.artists[i]));
 
-            //get related artist's top 10 songs
-            this.spotifyService.getArtistTop10(result.artists[i].id).subscribe(result => {
-              //save top tracks
-              for (let track of result.tracks) {
-                this.topTracks.push(this.mapper.jsonToTrack(track));
+                //get related artist's top 10 songs
+                this.spotifyService.getArtistTop10(result.artists[i].id).subscribe(result => {
+                  //save top tracks
+                  for (let track of result.tracks) {
+                    this.topTracks.push(this.mapper.jsonToTrack(track));
+                  }
+                  if (i == (RELATED_ARTISTS_NUMBER - 1)) {
+                    resolve();
+                  }
+                })
               }
-            })
-          }
-        });
+            }
+          });
+        }
       }
-    }
-
+    })
+      .then(() => {
+        if (this.topTracks.length > 0) {
+          this.modalService.openModal(content);
+        } else {
+          alert("No suggestions were found! " + this.topTracks.length);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
     //open create-playlist-modal and pass the songs
-    this.modalService.openModal(content);
+    // this.topTracksAsObservable.subscribe(
+    //   tracks => { },
+    //   err => console.log(err),
+    //   () => {
+    //     if (this.topTracks.length > 0) {
+    //       debugger;
+    //       this.modalService.openModal(content);
+    //     } else {
+    //       alert("No suggestions were found! " + this.topTracks.length);
+    //     }
+    //   }
+    // );
   }
 
   getRelated() {
-    console.log(this.topTracks);
+    console.log(this.artistsList);
   }
 }
