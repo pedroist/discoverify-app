@@ -50,6 +50,23 @@ export class SpotifyService {
     return this.http.post(url, body, httpOptions);
   }
 
+  updatePlaylist(name: string, description: string, isPublic: boolean, playlistId: string): Observable<any> {
+    const url = BASE_URL + `/playlists/${playlistId}`;
+    let body = {
+      name: name,
+      description: description,
+      public: isPublic
+    };
+
+    return this.http.put(url, body, httpOptions);
+  }
+
+  getPlaylistTracks(playlistId: string): Observable<any> {
+    const url = BASE_URL + `/playlists/${playlistId}/tracks`;
+
+    return this.http.get(url);
+  }
+
   addTracksToPlaylist(playlistId: string, uris: string[]) {
     const url = BASE_URL + `/playlists/${playlistId}/tracks`;
     let body = {

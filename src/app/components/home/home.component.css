@@ -1,11 +1,11 @@
-.cover-home {
+.cover-component {
     background-image: url(../../../assets/img/home-cover16x9.jpg);
     background-size:  100% 100%;
     padding-top: 50vh;
     padding-bottom: 50vh;
 }
 /*Overlay transparente por cima da imagem*/
-.cover-home:after {
+.cover-component:after {
     content: " ";
     z-index: 10;
     display: block;

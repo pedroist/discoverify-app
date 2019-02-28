@@ -20,6 +20,7 @@ import { ErrorInterceptorService } from './interceptors/error-interceptor.servic
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
+import { TrackComponent } from './components/track/track.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SearchComponent } from './components/search/search.component';
     NavbarComponent,
     NotFoundComponent,
     PlaylistComponent,
-    SearchComponent
+    SearchComponent,
+    TrackComponent
   ],
   imports: [
     BrowserModule,
