@@ -66,7 +66,6 @@ export class SpotifyService {
         uris.push(track.uri);
       }
     }
-    console.log("uris: " + uris);
     return uris;
   }
 }

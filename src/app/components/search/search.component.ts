@@ -4,7 +4,7 @@ import { Artist } from 'src/app/models/Artist';
 import { Track } from '../../models/Track';
 import { ModalService } from '../../services/modal.service';
 import { MapperService } from '../../services/mapper';
-//import { BehaviorSubject } from 'rxjs';
+import { UtilsService } from '../../services/utils.service';
 
 declare var $: any;
 
@@ -28,7 +28,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private spotifyService: SpotifyService,
     private modalService: ModalService,
-    private mapper: MapperService
+    private mapper: MapperService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -109,6 +110,10 @@ export class SearchComponent implements OnInit {
   }
 
   getRelated() {
-    console.log(this.artistsList);
+    let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    let arrayOfArrays = this.utilsService.splitArrayMaxLenght(array, 2);
+
+    console.log(arrayOfArrays);
   }
 }

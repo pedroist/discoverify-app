@@ -3,6 +3,7 @@ import { SpotifyService } from '../../services/spotify.service';
 import { Track } from '../../models/Track';
 import { Router } from '@angular/router';
 import { ModalService } from '../../services/modal.service';
+import { UtilsService } from '../../services/utils.service';
 
 const PRIVATE = "private";
 const PUBLIC = "public";
@@ -47,7 +48,8 @@ export class CreatePlaylistModalComponent implements OnInit {
   constructor(
     private spotifyService: SpotifyService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -63,18 +65,25 @@ export class CreatePlaylistModalComponent implements OnInit {
         if (!result.id) {
           throw "Error creating playlist. No id received";
         }
-        //addTracks to Playlist:
-        //TODO: dividir em 2 caso sejam mais que 100 musicas
+
         this.playlistId = result.id;
 
-        this.spotifyService.addTracksToPlaylist(
-          result.id,
-          this.spotifyService.getTracksUrisList(this.tracks)
-        ).subscribe(result => {
-          console.log("Tracks added to playlist " + this.playlistName + "successfully");
-          this.modalService.closeModal();
-          this.router.navigate([`/playlist/${this.playlistId}`]);
-        })
+        //since the service addTracksToPlaylist only allow a max of 100 tracks each time, 
+        //lets use a loop to add groups of tracks in case they're more than 100
+        let arrayOfTrackArrays = this.utilsService.splitArrayMaxLenght(this.tracks, 100);
+
+        //addTracks to Playlist in a loop:
+        for (let tracksGroup of arrayOfTrackArrays) {
+          this.spotifyService.addTracksToPlaylist(
+            result.id,
+            this.spotifyService.getTracksUrisList(tracksGroup)
+          )
+            .subscribe(result => {
+              console.log("Tracks added to playlist " + this.playlistName + "successfully");
+              this.modalService.closeModal();
+              this.router.navigate([`/playlist/${this.playlistId}`]);
+            })
+        }
       })
   }
 }
