@@ -46,4 +46,8 @@ export class AuthService {
   setIsLoggedInReference(isLoggedIn: boolean) {
     this.isLoggedInSource.next(isLoggedIn);
   }
+
+  getIsLoggedInReference(): Observable<boolean> {
+    return this.isLoggedInReference;
+  }
 }
