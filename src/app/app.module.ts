@@ -21,6 +21,7 @@ import { ErrorInterceptorService } from './interceptors/error-interceptor.servic
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { TrackComponent } from './components/track/track.component';
+import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edit-playlist-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TrackComponent } from './components/track/track.component';
     NotFoundComponent,
     PlaylistComponent,
     SearchComponent,
-    TrackComponent
+    TrackComponent,
+    EditPlaylistModalComponent
   ],
   imports: [
     BrowserModule,

@@ -24,4 +24,14 @@ export class UtilsService {
     }
     return arrayOfArrays;
   }
+
+  miliSecondsToTime(mSecs: string): string {
+    let minutes = Math.floor(parseInt(mSecs) / (60 * 1000));
+    let divisor_for_seconds = parseInt(mSecs) % (60 * 1000);
+    let seconds = Math.floor(divisor_for_seconds / 1000);
+
+    return (minutes < 10 ? "0" + minutes : minutes.toString())
+      + ":"
+      + (seconds < 10 ? "0" + seconds : seconds.toString());
+  }
 }

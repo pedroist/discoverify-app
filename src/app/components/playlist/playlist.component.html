@@ -4,12 +4,24 @@
 <div class="container mt-3 pt-3">
   <div class="row">
     <div class="mr-auto col-sm-6 col-12">
-      <h2 class="text-dark-blue playlist-title">Playlist Name</h2>
+      <h2 class="text-dark-blue playlist-title">{{playlistName}}</h2>
     </div>
     <div class="align-self-start d-flex justify-content-start justify-content-sm-end mt-2 mt-sm-0 col-sm-6 col-12">
-      <button class="btn btn-dark-blue">Edit Details</button>
+      <button (click)="editPlaylist(content)" class="btn btn-dark-blue">Edit Details</button>
   </div>
 </div>
 <div class="container mt-5">
     <app-track [track]="track" *ngFor="let track of tracks"></app-track>
 </div>
+
+<!--Edit-playlist-modal-->
+<ng-template #content>
+  <app-edit-playlist-modal
+    [playlistName]="playlistName"
+    [playlistDescription]="playlistDescription"
+    [playlistPrivacy]="playlistPrivacy"
+    [playlistId]="playlistId"
+    (playlistDetails)="onPlaylistDetailsChange($event)"
+  >
+  </app-edit-playlist-modal>
+</ng-template>

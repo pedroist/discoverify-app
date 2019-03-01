@@ -4,7 +4,7 @@ import { ArtistShort } from './ArtistShort';
 export interface Track {
     id?: string,
     name?: string,
-    duration?: number,
+    duration?: string,
     artists?: ArtistShort[],
     album?: Album,
     uri?: string

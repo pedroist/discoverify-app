@@ -108,12 +108,4 @@ export class SearchComponent implements OnInit {
         console.log(err);
       });
   }
-
-  getRelated() {
-    let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-    let arrayOfArrays = this.utilsService.splitArrayMaxLenght(array, 2);
-
-    console.log(arrayOfArrays);
-  }
 }

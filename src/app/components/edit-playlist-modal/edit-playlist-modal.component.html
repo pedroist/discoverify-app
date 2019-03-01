@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <div class="col-md-12 text-center">
+    <h2>Edit Playlist</h2>
+  </div>
+</div>
+<div class="modal-body">
+<form #createPlaylistForm (ngSubmit)="editPlaylist()">
+<div class="form-group">
+  <label>Playlist Name</label>
+  <input type="text"
+    class="form-control"
+    placeholder="Give a name to your playlist..."
+    name="playlistName"
+    [(ngModel)]="playlistName"
+    required
+    min-length="2"
+  >
+</div>
+<div class="row">
+  <div class="form-group mb-2 col-sm-8 col-xs-12">
+    <label>Description</label>
+    <textarea 
+      style="width: 100%"
+      name="playlistDescription"
+      [(ngModel)]="playlistDescription"
+      cols="37"
+      rows="5"
+      placeholder="Insert a Description..."
+    ></textarea>
+  </div>
+  <div class="col-sm-4 col-4 d-flex flex-column justify-content-end">  
+    <div class="form-check ml-4">
+      <input class="form-check-input mr-0" [(ngModel)]="playlistPrivacy" type="radio" name="radioButton" id="privateRadioButton" value="private">
+      <label class="form-check-label pl-1" for="privateRadioButton">
+        Private
+      </label>
+    </div>
+    <div class="form-check ml-4">
+      <input class="form-check-input mr-0" [(ngModel)]="playlistPrivacy" type="radio" name="radioButton" id="publicRadioButton" value="public">
+      <label class="form-check-label pl-1" for="publicRadioButton">
+        Public
+      </label>
+    </div>
+  </div>
+  <div class="col-sm-6 col-6 mx-auto d-flex flex-column justify-content-center">
+    <button class="btn btn-block btn-dark-blue create-playlist-btn">Edit</button>
+  </div>
+</div>
+</form>
+</div>

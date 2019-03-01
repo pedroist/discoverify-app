@@ -60,6 +60,11 @@ export class SpotifyService {
 
     return this.http.put(url, body, httpOptions);
   }
+  getPlaylistDetails(playlistId: string): Observable<any> {
+    const url = BASE_URL + `/playlists/${playlistId}`;
+
+    return this.http.get(url);
+  }
 
   getPlaylistTracks(playlistId: string): Observable<any> {
     const url = BASE_URL + `/playlists/${playlistId}/tracks`;

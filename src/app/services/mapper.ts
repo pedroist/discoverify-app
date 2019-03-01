@@ -3,13 +3,16 @@ import { Artist } from '../models/Artist';
 import { ArtistShort } from '../models/ArtistShort';
 import { Track } from '../models/Track';
 import { Album } from '../models/Album';
+import { UtilsService } from '../services/utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapperService {
 
-  constructor() { }
+  constructor(
+    private utils: UtilsService
+  ) { }
 
   jsonToArtist(artistJson: any): Artist {
     /*Transform genres array into string*/
@@ -37,12 +40,17 @@ export class MapperService {
   }
 
   jsonToAlbum(albumJson): Album {
+    let date =
+      albumJson.release_date_precision == "day" ?
+        albumJson.release_date.substring(0, 4) :
+        albumJson.release_date;
+
     return {
       id: albumJson.id,
       name: albumJson.name,
       total_tracks: albumJson.total_tracks,
       image_url: albumJson.images[2] ? albumJson.images[2].url : "assets/icons/151716-musician-human-pictograms/svg/dj.svg",
-      release_year: albumJson.release_date
+      release_year: date
     } as Album;
   }
   jsonToTrack(trackJson: any): Track {
@@ -51,10 +59,13 @@ export class MapperService {
     for (let artist of trackJson.artists) {
       artistsAux.push(this.jsonToArtistShort(artist));
     }
+
+    let duration = this.utils.miliSecondsToTime(trackJson.duration_ms);
+
     return {
       id: trackJson.id,
       name: trackJson.name,
-      duration: trackJson.duration_ms,
+      duration: duration,
       artists: artistsAux,
       album: this.jsonToAlbum(trackJson.album),
       uri: trackJson.uri
