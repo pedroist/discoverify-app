@@ -23,6 +23,9 @@ import { SearchComponent } from './components/search/search.component';
 import { TrackComponent } from './components/track/track.component';
 import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edit-playlist-modal.component';
 
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/reducers';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,8 @@ import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edi
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    StoreModule.forRoot(reducers, {})
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
