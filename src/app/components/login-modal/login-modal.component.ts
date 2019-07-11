@@ -22,6 +22,7 @@ import { Artist } from '../../models/Artist';
     }
     .login-btn:active, .login-btn:focus {
       box-shadow: none !important;
+      cursor: pointer;
     }
   `]
 })
