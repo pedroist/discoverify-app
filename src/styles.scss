@@ -1,33 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
-body{
-    padding: 0;
-    margin: auto;
+body {
+  padding: 0;
+  margin: auto;
 }
 
 .cover-component > h1:first-of-type {
-    color: #FFFFFF;
-    font-family: 'Noto Sans', sans-serif;
-    text-shadow: 3px 4px 4px rgba(0, 0, 0, 0.77);
+  color: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+  text-shadow: 3px 4px 4px rgba(0, 0, 0, 0.77);
 }
 
 .cover-component {
-    background-size:  100% 100%;
-    padding-top: 14vh;
-    background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-top: 14vh;
+  background-repeat: no-repeat;
 
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-    }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
 }
 
+//Colors
+$turkey-blue: #249eacd4;
+
+
+//Bootstrap variables
 $theme-colors: (
-    "dark": #111111,
-    "dark-blue": #203541,
-    "secondary": #e5e5e56b,
-    "turkey-blue": #249eacd4
+  "dark": #111111,
+  "dark-blue": #203541,
+  "secondary": #e5e5e56b,
+  "turkey-blue": $turkey-blue
 );
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+:export {
+  testingColor: $turkey-blue;
+}
