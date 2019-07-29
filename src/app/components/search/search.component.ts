@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   artistsList: Artist[] = [];
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
+  isCustom: Boolean = false;
 
   // topTracksSource = new BehaviorSubject<Track[]>([]);
   // topTracksAsObservable = this.topTracksSource.asObservable();
@@ -107,5 +108,9 @@ export class SearchComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  onSlideToggleChange() {
+    console.log("Toggled");
   }
 }
