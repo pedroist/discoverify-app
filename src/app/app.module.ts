@@ -1,28 +1,27 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
-import { UiSwitchModule } from "ngx-ui-switch";
 
-import { AppComponent } from "./app.component";
-import { ArtistCardComponent } from "./components/artist-card/artist-card.component";
-import { ArtistsComponent } from "./components/artists/artists.component";
-import { CreatePlaylistModalComponent } from "./components/create-playlist-modal/create-playlist-modal.component";
-import { HomeComponent } from "./components/home/home.component";
-import { LoginModalComponent } from "./components/login-modal/login-modal.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { PlaylistComponent } from "./components/playlist/playlist.component";
-import { AppRoutingModule } from ".//app-routing.module";
+import { AppComponent } from './app.component';
+import { ArtistCardComponent } from './components/artist-card/artist-card.component';
+import { ArtistsComponent } from './components/artists/artists.component';
+import { CreatePlaylistModalComponent } from './components/create-playlist-modal/create-playlist-modal.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
+import { AppRoutingModule } from './/app-routing.module';
 
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { JwtInterceptorService } from "./interceptors/jwt-interceptor.service";
-import { ErrorInterceptorService } from "./interceptors/error-interceptor.service";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptorService } from './interceptors/jwt-interceptor.service';
+import { ErrorInterceptorService } from './interceptors/error-interceptor.service';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { SearchComponent } from "./components/search/search.component";
-import { TrackComponent } from "./components/track/track.component";
-import { EditPlaylistModalComponent } from "./components/edit-playlist-modal/edit-playlist-modal.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './components/search/search.component';
+import { TrackComponent } from './components/track/track.component';
+import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edit-playlist-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,21 +43,12 @@ import { EditPlaylistModalComponent } from "./components/edit-playlist-modal/edi
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule,
-    UiSwitchModule
+    NgbModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptorService,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptorService,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -5,7 +5,6 @@ import { Track } from '../../models/Track';
 import { ModalService } from '../../services/modal.service';
 import { MapperService } from '../../services/mapper';
 import { UtilsService } from '../../services/utils.service';
-import { testingColor } from '../../../styles.scss';
 
 declare var $: any;
 
@@ -22,7 +21,7 @@ export class SearchComponent implements OnInit {
   artistsList: Artist[] = [];
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
-  //testColor: string = "#249eacd4"
+
   // topTracksSource = new BehaviorSubject<Track[]>([]);
   // topTracksAsObservable = this.topTracksSource.asObservable();
 
@@ -30,7 +29,7 @@ export class SearchComponent implements OnInit {
     private spotifyService: SpotifyService,
     private modalService: ModalService,
     private mapper: MapperService,
-    private testColor: testingColor
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
