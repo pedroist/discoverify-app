@@ -22,4 +22,5 @@ export function authReducer(state = initialState, action): authReducerState {
                 login: false
             }
     }
+    return state;
 }
