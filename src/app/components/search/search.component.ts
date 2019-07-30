@@ -4,7 +4,6 @@ import { Artist } from 'src/app/models/Artist';
 import { Track } from '../../models/Track';
 import { ModalService } from '../../services/modal.service';
 import { MapperService } from '../../services/mapper';
-import { UtilsService } from '../../services/utils.service';
 
 declare var $: any;
 
@@ -22,6 +21,7 @@ export class SearchComponent implements OnInit {
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
   isCustom: Boolean = false;
+  slideToggleButtonColor: string = "primary";
 
   // topTracksSource = new BehaviorSubject<Track[]>([]);
   // topTracksAsObservable = this.topTracksSource.asObservable();
@@ -29,8 +29,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private spotifyService: SpotifyService,
     private modalService: ModalService,
-    private mapper: MapperService,
-    private utilsService: UtilsService
+    private mapper: MapperService
   ) { }
 
   ngOnInit() {

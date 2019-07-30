@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/search/search.component';
 import { TrackComponent } from './components/track/track.component';
 import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edit-playlist-modal.component';
+import { CustomizePanelComponent } from './components/customize-panel/customize-panel.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditPlaylistModalComponent } from './components/edit-playlist-modal/edi
     PlaylistComponent,
     SearchComponent,
     TrackComponent,
-    EditPlaylistModalComponent
+    EditPlaylistModalComponent,
+    CustomizePanelComponent
   ],
   imports: [
     BrowserModule,
