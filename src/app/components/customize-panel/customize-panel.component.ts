@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import * as _ from "lodash";
 
 const MAX_NUMBER_OF_ARTISTS = 5;
@@ -13,6 +13,8 @@ export class CustomizePanelComponent implements OnInit {
   slideToggleButtonColor: string = "primary";
   artistsNumber: number = 1;
   songsNumber: number = 1;
+  @Output() artistsNumberOut: EventEmitter<number> = new EventEmitter();
+  @Output() songsNumberOut: EventEmitter<number> = new EventEmitter();
   numberOfArtistsArray: number[] = [];
   numberOfSongsPerArtistArray: number[] = [];
 
@@ -24,10 +26,10 @@ export class CustomizePanelComponent implements OnInit {
   }
 
   onArtistsNumberChange() {
-    console.log(this.artistsNumber);
+    this.artistsNumberOut.emit(this.artistsNumber);
   }
 
   onSongsNumberChange() {
-    console.log(this.songsNumber);
+    this.songsNumberOut.emit(this.songsNumber);
   }
 }

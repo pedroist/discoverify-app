@@ -3,7 +3,10 @@
     <h1>Choose your favorite artists...</h1>
 </div>
 <!--Customize panel-->
-<app-customize-panel></app-customize-panel>
+<app-customize-panel
+  (artistsNumberOut)="onArtistsOutputReceived($event)"
+  (songsNumberOut)="onSongsOutputReceived($event)">
+</app-customize-panel>
 <!--END Customize panel-->
 <div class="container mt-3 pt-3">
   <form class="form-inline form-container">

@@ -79,7 +79,7 @@ export class CreatePlaylistModalComponent implements OnInit {
             this.spotifyService.getTracksUrisList(tracksGroup)
           )
             .subscribe(result => {
-              console.log("Tracks added to playlist " + this.playlistName + "successfully");
+              console.log("Tracks added to playlist " + this.playlistName + " successfully");
               this.modalService.closeModal();
               this.router.navigate([`/playlist/${this.playlistId}`]);
             })

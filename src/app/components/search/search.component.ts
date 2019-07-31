@@ -7,7 +7,8 @@ import { MapperService } from '../../services/mapper';
 
 declare var $: any;
 
-const RELATED_ARTISTS_NUMBER = 3;
+const DEFAULT_RELATED_ARTISTS_NUMBER = 3;
+const DEFAULT_NUMBER_OF_SONGS_PER_ARTIST = 2;
 
 @Component({
   selector: 'app-search',
@@ -21,6 +22,8 @@ export class SearchComponent implements OnInit {
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
   isCustom: Boolean = false;
+  numberOfRelatedArtists: number = DEFAULT_RELATED_ARTISTS_NUMBER;
+  numberOfSongsPerArtist: number = DEFAULT_NUMBER_OF_SONGS_PER_ARTIST;
 
   // topTracksSource = new BehaviorSubject<Track[]>([]);
   // topTracksAsObservable = this.topTracksSource.asObservable();
@@ -47,6 +50,16 @@ export class SearchComponent implements OnInit {
       }
     });
   }
+
+  /* Received Outputs ---------- */
+  onArtistsOutputReceived(numberOfArtists: number) {
+    this.numberOfRelatedArtists = numberOfArtists;
+  }
+
+  onSongsOutputReceived(numberOfSongs: number) {
+    this.numberOfSongsPerArtist = numberOfSongs;
+  }
+  /* --------------------------- */
 
   onInputChange() {
     if (this.searchTerm != "") {
@@ -76,17 +89,23 @@ export class SearchComponent implements OnInit {
           this.spotifyService.getRelatedArtists(artist.id).subscribe(result => {
             if (result.artists.length > 0) {
 
-              for (let i = 0; i < RELATED_ARTISTS_NUMBER; i++) {
+              for (let i = 0; i < this.numberOfRelatedArtists; i++) {
                 //Save related artist
                 this.relatedArtists.push(this.mapper.jsonToArtist(result.artists[i]));
 
                 //get related artist's top 10 songs
                 this.spotifyService.getArtistTop10(result.artists[i].id).subscribe(result => {
                   //save top tracks
-                  for (let track of result.tracks) {
+                  for (let k = 0; k < this.numberOfSongsPerArtist; k++) {
+                    debugger;
+                    if (k >= result.tracks.length)
+                      break;
+
+                    let track = result.tracks[k];
                     this.topTracks.push(this.mapper.jsonToTrack(track));
                   }
-                  if (i == (RELATED_ARTISTS_NUMBER - 1)) {
+                  if (i == (this.numberOfRelatedArtists - 1)) {
+                    //resolve the promise when the cycle ends
                     resolve();
                   }
                 })
