@@ -4,7 +4,6 @@
       <div class="w-75 mx-auto">
         <mat-slide-toggle
           [(ngModel)]="isCustom"
-          (change)="onSlideToggleChange()"
           [color]="slideToggleButtonColor">
             Customize
         </mat-slide-toggle>
@@ -16,24 +15,30 @@
       <div class="form-group col-6">
         <div class="w-75 mx-auto">
           <label for="numberArtists">Number of artists: </label>
-          <select class="form-control" id="numberArtists">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select
+            class="form-control"
+            [(ngModel)]="artistsNumber"
+            name="artistsNumber"
+            id="numberArtists"
+            (change)="onArtistsNumberChange()">
+              <option *ngFor="let numberOfArtists of numberOfArtistsArray">
+                {{numberOfArtists}}
+              </option>
           </select>
         </div>
       </div>
       <div class="form-group col-6">
         <div class="w-75 mx-auto">
           <label for="numberSongsPerArtist">Number of songs per artist: </label>
-          <select class="form-control" id="numberSongsPerArtist">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select
+            class="form-control"
+            [(ngModel)]="songsNumber"
+            name="songsNumber"
+            id="numberSongsPerArtist"
+            (change)="onSongsNumberChange()">
+              <option *ngFor="let numberOfSongs of numberOfSongsPerArtistArray">
+                {{numberOfSongs}}
+              </option>
           </select>
         </div>
       </div>
