@@ -13,4 +13,7 @@ export class CustomizePanelComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSlideToggleChange() {
+    console.log("Toggled");
+  }
 }

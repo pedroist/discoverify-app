@@ -107,8 +107,4 @@ export class SearchComponent implements OnInit {
         console.log(err);
       });
   }
-
-  onSlideToggleChange() {
-    console.log("Toggled");
-  }
 }
