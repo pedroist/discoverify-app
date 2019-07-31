@@ -23,7 +23,7 @@
           placeholder="Search for an artist..."
           required
           autocomplete="off">
-        <ul class="list-group" id="artistsList" (focusout)="onFocusOut()">
+        <ul class="list-group" id="artistsList">
           <li *ngFor="let result of searchResults" (click)="onSelect(result)" class="list-group-item">
             <div class="row">
               <img src={{result.image_url}} alt={{result.name}}>
