@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customize-panel.component.scss']
 })
 export class CustomizePanelComponent implements OnInit {
+  slideToggleButtonColor: string = "primary";
 
   constructor() { }
 

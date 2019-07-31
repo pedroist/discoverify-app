@@ -3,13 +3,8 @@
     <h1>Choose your favorite artists...</h1>
 </div>
 <!--Customize panel-->
-  <mat-slide-toggle
-    [(ngModel)]="isCustom"
-    (change)="onSlideToggleChange()"
-    [color]="slideToggleButtonColor">
-      Customize {{isCustom}}
-  </mat-slide-toggle>  
-  <!--END Customize panel-->
+<app-customize-panel></app-customize-panel>
+<!--END Customize panel-->
 <div class="container mt-3 pt-3">
   <form #searchForm class="form-inline form-container">
     <div class="row">

@@ -1,3 +1,32 @@
-<p>
-  customize-panel works!
-</p>
+<div class="container mt-3 pt-3">
+  <mat-slide-toggle
+    [(ngModel)]="isCustom"
+    (change)="onSlideToggleChange()"
+    [color]="slideToggleButtonColor">
+      Customize
+  </mat-slide-toggle>
+  <form *ngIf="isCustom" class="form-container mt-3">
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="numberArtists">Number of artists: </label>
+        <select class="form-control" id="numberArtists">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group col-6">
+        <label for="numberSongsPerArtist">Number of songs per artist: </label>
+        <select class="form-control" id="numberSongsPerArtist">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>

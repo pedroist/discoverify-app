@@ -21,7 +21,6 @@ export class SearchComponent implements OnInit {
   relatedArtists: Artist[] = [];
   topTracks: Track[] = [];
   isCustom: Boolean = false;
-  slideToggleButtonColor: string = "primary";
 
   // topTracksSource = new BehaviorSubject<Track[]>([]);
   // topTracksAsObservable = this.topTracksSource.asObservable();
