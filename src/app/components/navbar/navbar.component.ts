@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth.service';
 import { SpotifyService } from '../../services/spotify.service';
 import { Profile } from '../../models/Profile';
@@ -35,7 +34,7 @@ export class NavbarComponent implements OnInit {
           this.profile.name = profile.display_name;
           this.profile.followers = profile.followers.total;
           this.profile.img =
-            (profile.images.length > 0 && typeof profile.images[0].url !== "undefined") ?
+            (profile.images.length > 0 && typeof profile.images[0].url !== 'undefined') ?
               profile.images[0].url :
               '';
         });
