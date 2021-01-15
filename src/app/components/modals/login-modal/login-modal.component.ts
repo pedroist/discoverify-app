@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { SpotifyService } from '../../services/spotify.service';
-import { Artist } from '../../models/Artist';
+import { SpotifyService } from '../../../services/spotify.service';
+import { Artist } from '../../../models/Artist';
 
 @Component({
   selector: 'app-login-modal',

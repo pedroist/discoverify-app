@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
-import { ModalService } from '../../services/modal.service';
-import { SpotifyService } from '../../services/spotify.service';
-import { PlaylistDetails } from '../../models/PlaylistDetails';
+import { ModalService } from '../../../services/modal.service';
+import { SpotifyService } from '../../../services/spotify.service';
+import { PlaylistDetails } from '../../../models/PlaylistDetails';
 
 const PRIVATE = "private";
 const PUBLIC = "public";

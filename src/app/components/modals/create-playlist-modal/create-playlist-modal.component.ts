@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { SpotifyService } from '../../services/spotify.service';
-import { Track } from '../../models/Track';
+import { SpotifyService } from '../../../services/spotify.service';
+import { Track } from '../../../models/Track';
 import { Router } from '@angular/router';
-import { ModalService } from '../../services/modal.service';
-import { UtilsService } from '../../services/utils.service';
+import { ModalService } from '../../../services/modal.service';
+import { UtilsService } from '../../../services/utils.service';
 
 const PRIVATE = "private";
 const PUBLIC = "public";

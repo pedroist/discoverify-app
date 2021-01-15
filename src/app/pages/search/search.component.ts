@@ -97,7 +97,7 @@ export class SearchComponent implements OnInit {
                 this.spotifyService.getArtistTop10(result.artists[i].id).subscribe(result => {
                   //save top tracks
                   for (let k = 0; k < this.numberOfSongsPerArtist; k++) {
-                    debugger;
+                    
                     if (k >= result.tracks.length)
                       break;
 
