@@ -6,13 +6,12 @@ import { ModalService } from '../../../services/modal.service';
 import { UtilsService } from '../../../services/utils.service';
 
 const PRIVATE = "private";
-const PUBLIC = "public";
 
 @Component({
   selector: 'app-create-playlist-modal',
   templateUrl: './create-playlist-modal.component.html',
   //styleUrls: ['./create-playlist-modal.component.css']
-  encapsulation: ViewEncapsulation.None, //permite aplicar estilos a um componente já existente
+  encapsulation: ViewEncapsulation.None, //Allows to apply styles to an existent component
   styles: [`
     .modal {
       top: 15%;
@@ -56,6 +55,7 @@ export class CreatePlaylistModalComponent implements OnInit {
   }
 
   createPlaylist() {
+    //Create empty playlist
     this.spotifyService.createPlaylist(
       this.playlistName,
       this.playlistDescription,
@@ -70,7 +70,7 @@ export class CreatePlaylistModalComponent implements OnInit {
 
         //since the service addTracksToPlaylist only allow a max of 100 tracks each time, 
         //lets use a loop to add groups of tracks in case they're more than 100
-        let arrayOfTrackArrays = this.utilsService.splitArrayMaxLenght(this.tracks, 100);
+        let arrayOfTrackArrays = this.utilsService.splitArrayMaxLenght(Array.from(this.tracks), 100);
 
         //addTracks to Playlist in a loop:
         for (let tracksGroup of arrayOfTrackArrays) {

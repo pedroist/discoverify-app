@@ -106,7 +106,7 @@ export class SearchComponent implements OnInit {
                   }
                   if (i == (this.numberOfRelatedArtists - 1)) {
                     //resolve the promise when the cycle ends
-                    resolve();
+                    resolve('Ended cycle');
                   }
                 })
               }
@@ -117,7 +117,7 @@ export class SearchComponent implements OnInit {
     })
       .then(() => {
         if (this.topTracks.length > 0) {
-          this.modalService.openModal(content);
+          this.modalService.openModal(content);//content is the template that came on input of createTemplate()
         } else {
           alert("No suggestions were found! " + this.topTracks.length);
         }
