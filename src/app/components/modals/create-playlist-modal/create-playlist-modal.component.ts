@@ -38,7 +38,7 @@ const PRIVATE = "private";
   `]
 })
 export class CreatePlaylistModalComponent implements OnInit {
-  @Input() tracks: Track[];
+  @Input() tracks: string[];
   playlistName: string;
   playlistDescription: string;
   playlistPrivacy: string = PRIVATE;
@@ -70,7 +70,7 @@ export class CreatePlaylistModalComponent implements OnInit {
 
         //since the service addTracksToPlaylist only allow a max of 100 tracks each time, 
         //lets use a loop to add groups of tracks in case they're more than 100
-        let arrayOfTrackArrays = this.utilsService.splitArrayMaxLenght(Array.from(this.tracks), 100);
+        let arrayOfTrackArrays = this.utilsService.splitArrayMaxLenght(this.tracks, 100);
 
         //addTracks to Playlist in a loop:
         for (let tracksGroup of arrayOfTrackArrays) {

@@ -11,7 +11,7 @@ import { concatAll, concatMap, take } from 'rxjs/operators';
 declare var $: any;
 
 const DEFAULT_RELATED_ARTISTS_NUMBER = 2;
-const DEFAULT_NUMBER_OF_SONGS_PER_ARTIST = 1;
+const DEFAULT_NUMBER_OF_SONGS_PER_ARTIST = 3;
 
 @Component({
   selector: 'app-search',
@@ -137,15 +137,14 @@ export class SearchComponent implements OnInit {
         })
       ) 
       .subscribe((track: Track) => {
-        debugger;
         if(track && track.uri){
           this.topTracksURIs.push(track.uri);
         }
       }, error => {
         console.log(error);
       }, () => {
-        console.log("Complete!");
-        debugger;
+        console.log("All tracks saved! Open modal to create playlist!");
+
         if (this.topTracksURIs.length > 0) {
           this.modalService.openModal(content);//content is the template that came on input of createTemplate()
         } else {
