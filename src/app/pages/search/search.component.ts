@@ -29,9 +29,6 @@ export class SearchComponent implements OnInit {
   numberOfSongsPerArtist: number = DEFAULT_NUMBER_OF_SONGS_PER_ARTIST;
   totalNumberOfTracks: number = DEFAULT_RELATED_ARTISTS_NUMBER * DEFAULT_NUMBER_OF_SONGS_PER_ARTIST; // default
 
-  // topTracksSource = new BehaviorSubject<Track[]>([]);
-  // topTracksAsObservable = this.topTracksSource.asObservable();
-
   constructor(
     private spotifyService: SpotifyService,
     private modalService: ModalService,
@@ -130,7 +127,7 @@ export class SearchComponent implements OnInit {
                         return obj.tracks;
                       }),
                       concatAll(),
-                      take(1)
+                      take(this.numberOfSongsPerArtist)
                     )
               })
             )
