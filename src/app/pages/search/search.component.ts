@@ -1,11 +1,11 @@
-import { count, distinct, first, map, mergeMap, skipWhile, switchMap, takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { map, mergeMap, takeWhile, tap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { Artist } from 'src/app/models/Artist';
 import { Track } from '../../models/Track';
 import { ModalService } from '../../services/modal.service';
 import { MapperService } from '../../services/mapper';
-import { concat, from, iif, of } from 'rxjs';
+import { from, iif, of } from 'rxjs';
 import { concatAll, concatMap, take } from 'rxjs/operators';
 
 declare var $: any;
