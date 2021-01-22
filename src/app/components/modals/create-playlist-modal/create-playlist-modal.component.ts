@@ -76,7 +76,7 @@ export class CreatePlaylistModalComponent implements OnInit {
         for (let tracksGroup of arrayOfTrackArrays) {
           this.spotifyService.addTracksToPlaylist(
             result.id,
-            this.spotifyService.getTracksUrisList(tracksGroup)
+            tracksGroup
           )
             .subscribe(result => {
               console.log("Tracks added to playlist " + this.playlistName + " successfully");

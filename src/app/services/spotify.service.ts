@@ -80,14 +80,4 @@ export class SpotifyService {
 
     return this.http.post(url, body, httpOptions);
   }
-
-  getTracksUrisList(tracks: Track[]): string[] {
-    let uris: string[] = [];
-    for (let track of tracks) {
-      if (track.uri) {
-        uris.push(track.uri);
-      }
-    }
-    return uris;
-  }
 }
